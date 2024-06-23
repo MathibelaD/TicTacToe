@@ -22,13 +22,37 @@ def modifyArray(num, turn):
     col = num % 3
     gameBoard[row][col] = turn
 
+def checkWinner():
+    # Check rows and columns
+    for i in range(rows):
+        if gameBoard[i][0] == gameBoard[i][1] == gameBoard[i][2]:
+            return gameBoard[i][0]
+        if gameBoard[0][i] == gameBoard[1][i] == gameBoard[2][i]:
+            return gameBoard[0][i]
+    
+    # Check diagonals
+    if gameBoard[0][0] == gameBoard[1][1] == gameBoard[2][2]:
+        return gameBoard[0][0]
+    if gameBoard[0][2] == gameBoard[1][1] == gameBoard[2][0]:
+        return gameBoard[0][2]
+    
+    return None 
+
 leaveLoop = False    
 counter = 1
 
 while(leaveLoop == False):
+    printGameBoard()
+    winner = checkWinner()
+    if winner:
+        print(f"\n{winner} wins!")
+        break
+    if len(possibleNumbers) == 0:
+        print("\nIt's a draw!")
+        break
     ## user's turn
     if(counter % 2 == 1):
-        printGameBoard()
+        # printGameBoard()
         pickedNum = int(input("\nPick a number [1-9]: "))
         if(pickedNum >= 1 and pickedNum <= 9):
             if(pickedNum in possibleNumbers):
