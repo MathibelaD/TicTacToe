@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         } else if (result.status === 'win') {
             status.textContent = `${result.winner} wins!`;
+            // Trigger confetti animation on win
+            confetti({
+                particleCount: 200,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
         } else if (result.status === 'continue') {
             updateBoard(result.board);
         }
